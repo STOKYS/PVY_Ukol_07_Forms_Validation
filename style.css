@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
+
+*{
+    color: white;
+}
+
+body{
+    background-color: rgb(30,30,30);
+}
+
+main {
+    background-color: rgb(20,20,20);
+}
+
+input, textarea, select{
+    color: white !important;
+    background-color: rgb(10,10,10) !important;
+}
+
+span{
+    color: rgb(200,200,200) !important;
+    background-color: rgb(30,30,30) !important;
+}
+
+input:disabled{
+    color: rgb(200,200,200) !important;
+    background-color: rgb(40,40,40) !important;
+}

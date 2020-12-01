@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"
         integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -40,7 +41,10 @@
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label" for="narozeni">Datum narození</label>
                     <div class="col-sm-8">
-                        <!--Do input type date nelze zadat nevalidní datum, takže pattern není potřeba-->
+                        <!--
+                            Do input type date nelze zadat nevalidní datum, takže pattern není potřeba
+                            Jenom jsem udělal script age.js který nedovolí zadat nesmyslný rok
+                        -->
                         <input id="narozeni" name="narozeni" placeholder="dd.mm.yyyy" class="form-control" type="date">
                     </div>
                 </div>
@@ -112,7 +116,7 @@
                     <label class="col-sm-4 col-form-label" for="poznamka">Poznámka</label>
                     <div class="col-sm-8">
                         <textarea class="form-control" id="poznamka" rows="5"
-                            name="poznamka">Zde zapište poznámku týkající se studenta</textarea>
+                            name="poznamka" placeholder="Zde zapište poznámku týkající se studenta..."></textarea>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -122,8 +126,10 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                             </div>
-                            <!--Netuším jaké jsou podmínky pro Moodle username, ale pokud by se jednalo o jméno přiřazeno 
-                                naší školou začínalo by to na: zkráceninou názvu oboru následující čtyři čísla-->
+                            <!--
+                                Netuším jaké jsou podmínky pro Moodle username, ale pokud by se jednalo o jméno přiřazeno 
+                                naší školou začínalo by to na: zkráceninou názvu oboru následující čtyři čísla
+                            -->
                             <input type="text" class="form-control" name="username" id="username" placeholder="?"
                                 pattern="^([a-z]{2})([0-9]{4})$" aria-describedby="inputGroupPrepend" required>
                             <div class="invalid-feedback">
@@ -139,8 +145,11 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroupPrepend">IPv4</span>
                             </div>
-                            <!--Podle placeholderu jsem usoudil že se může jednat pouze o lokální adresy začínající na 192.168, pokračující dvěma čísly rozdělené tečkou
-                                Zatím je možné zadat čísla větší než 255-->
+                            <!--
+                                Podle placeholderu jsem usoudil že se může jednat pouze o lokální adresy začínající na 192.168, pokračující dvěma čísly rozdělené tečkou
+                                Není možné zadat číslo větší než 255, kvůli skripu ipv4.js, ale našel jsem na internetu i regulární výraz:
+                                ^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$
+                            -->
                             <input type="text" class="form-control" name="ip" id="ip" placeholder="192.168.?.?"
                                 pattern="^(192.168)(\.[0-2]?[0-9]?[0-9]){2}$"
                                 aria-describedby="inputGroupPrepend" required>
@@ -229,8 +238,6 @@
         <hr>
         <p>&copy; 2020 - IT2</p>
     </footer>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
@@ -239,6 +246,10 @@
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
         integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous">
+    </script>
+    <script src="js/age.js">
+    </script>
+    <script src="js/ipv4.js">
     </script>
     <script src="js/class.js">
     </script>
@@ -251,7 +262,6 @@
                 var forms = document.getElementsByClassName('needs-validation');
                 // Loop over them and prevent submission
                 var validation = Array.prototype.filter.call(forms, function (form) {
-                    console.log(forms)
                     form.addEventListener('submit', function (event) {
                         if (form.checkValidity() === false) {
                             console.log("It's false")
